@@ -17,6 +17,7 @@ public class LoginPage {
 		app.click("nextBtn_id");
 		app.type("password_id","password");
 		app.click("nextBtn_id");
+		app.wait(2);
         app.click("crm_xpath");
 		app.log("I am logged in zoho.com");
  }
