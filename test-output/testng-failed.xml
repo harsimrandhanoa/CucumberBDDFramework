@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Test runner]">
+  <test name="Cucumber Runner(failed)">
+    <classes>
+      <class name="zoho.runner.MyRunner">
+        <methods>
+          <include name="runScenario" invocation-numbers="0 1"/>
+          <include name="tearDownClass"/>
+          <include name="setUpClass"/>
+        </methods>
+      </class> <!-- zoho.runner.MyRunner -->
+    </classes>
+  </test> <!-- Cucumber Runner(failed) -->
+</suite> <!-- Failed suite [Test runner] -->
