@@ -2,7 +2,6 @@ package zoho.context;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
 
 import zoho.managers.PageObjectManager;
 import zoho.reports.ExtentManager;
@@ -14,7 +13,6 @@ public class TestContext {
 	private PageObjectManager pageObjectManager;
 	
    public TestContext(){
-	   System.out.println("Constructor TestContext");
 	   report = ExtentManager.getReports();
 	   this.pageObjectManager = new PageObjectManager();
    }
@@ -28,7 +26,8 @@ public class TestContext {
     	this.pageObjectManager.getWebDriverManager().init(test);
     	}
     
-    public void endScenario(){
+    public void endScenario(String scenarioName){
+	  log("Ending of scenario " +scenarioName);
 	  report.flush();
     }
     

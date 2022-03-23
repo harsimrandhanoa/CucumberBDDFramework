@@ -27,14 +27,14 @@ Background: Logged In
   
   @CreateLead
   Scenario Outline: Creation of a lead
-    When I go to create lead page
+   When I go to create lead page
     And enter and submit lead details
     | FirstName    | LastName     | Email           | Company   |
     | <FirstName>  | <LastName>   | <Email>         | <Company> |
     Then Lead Description Page should load
-    And I verify lead details
-    When I click on 'Leads' in top menu
-    Then Lead '<LeadName>' should 'be present' inside the grid
+     And I verify lead details
+     When I click on 'Leads' in top menu
+     Then Lead '<LeadName>' should 'be present' inside the grid
      Examples: 
       | FirstName  | LastName | Email         | Company | LeadName   |
       | Alex       |   Jones  | xyz@gmail.com |  MRF    | Alex Jones |
@@ -44,7 +44,7 @@ Background: Logged In
     Scenario Outline: Deletion of the lead
     When I select the lead '<LeadName>'
     And I click the delete button
-   # Then lead should be deleted
+  # Then lead should be deleted
     Then Lead '<LeadName>' should 'not be present' inside the grid
 
     Examples: 

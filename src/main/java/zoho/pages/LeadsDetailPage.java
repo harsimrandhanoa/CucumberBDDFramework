@@ -1,6 +1,7 @@
 package zoho.pages;
 
-import io.cucumber.java.en.When;
+import com.aventstack.extentreports.model.Test;
+
 import zoho.managers.WebDriverManager;
 
 public class LeadsDetailPage {
@@ -33,16 +34,18 @@ public class LeadsDetailPage {
 	public void deleteLead() {
 		app.click("action_css");
 		app.click("delete_xpath");
-		app.wait(2);
+		app.wait(5);
 		app.click("delete_id");
+		app.wait(2);
 	}
 	
 	public void validateLeadPresent(String leadName) {
 		int rowNum = app.getLeadRowNumberWithCellData(leadName);
 		if(rowNum==-1)
-			app.reportFailure("Lead not found inlead list", true);
-
-	}
+			app.reportFailure("Lead not found in lead list", true);
+	       else
+       app.passTest(leadName + " present in leads so test passed");
+     }
 	
 	
 	public void validateLeadNotPresent(String leadName) {
@@ -50,6 +53,8 @@ public class LeadsDetailPage {
 		int rowNum = app.getLeadRowNumberWithCellData(leadName);
        if(rowNum!=-1)
 			app.reportFailure("Lead  found in lead list", true);
+       else
+       app.passTest(leadName + " not present in leads so test passed");
 
 	}
    

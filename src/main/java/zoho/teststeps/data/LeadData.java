@@ -15,4 +15,8 @@ public class LeadData {
 		
 	}
 
+	  @Override
+	    public String toString() {
+	        return "First Name: "+ this.firstName + ",Last Name: " + this.lastName + ",Email: "+ this.email+ ",Company: "+this.company;
+	    }
 }

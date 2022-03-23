@@ -14,7 +14,6 @@ public class LeadDescriptionPage {
 		if(!app.isElementPresent("last_name_id")) {
 			app.reportFailure("Lead Description Page has not loaded", true);
 		}
-		
 	}
 
 

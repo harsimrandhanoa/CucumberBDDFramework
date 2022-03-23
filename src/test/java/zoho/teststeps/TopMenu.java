@@ -1,18 +1,16 @@
 package zoho.teststeps;
 
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.When;
 import zoho.context.TestContext;
 import zoho.pages.TopMenuComponent;
 
 public class TopMenu {
   
 	public TestContext testContext;
-  public TopMenuComponent topMenu;
+    public TopMenuComponent topMenu;
 
 
   public TopMenu(TestContext testContext){
-		System.out.println("<-------------------- In the topmenu constructor ----------------------->");
 		this.testContext = testContext;
 		this.topMenu = testContext.getPageObjectManager().getTopMenu();
 		}

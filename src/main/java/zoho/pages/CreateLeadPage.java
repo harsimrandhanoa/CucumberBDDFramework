@@ -14,10 +14,7 @@ public class CreateLeadPage {
 	}
 
 	public void submitLeadDetails(List<LeadData> leadData) {
-		System.out.println("The data is "+leadData.get(0).firstName);
-		String firstName = leadData.get(0).firstName;
-		System.out.println("The data is-----> "+firstName);
-
+		app.log("Creating lead with data "+leadData.get(0));
 		app.typeLeadData("lead_first_name_id", leadData.get(0).firstName);
 		app.typeLeadData("lead_last_name_id", leadData.get(0).lastName);
 		app.typeLeadData("lead_company_id", leadData.get(0).company);

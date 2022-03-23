@@ -1,12 +1,19 @@
 package zoho.managers;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,12 +25,14 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.Reporter;
 import org.testng.asserts.SoftAssert;
+import org.apache.commons.io.FileUtils;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+import zoho.reports.ExtentManager;
+
 
 
 public class WebDriverManager {
@@ -59,13 +68,20 @@ public void openBrowser(String browser){
 		log("Opening browser "+browser);
 
 		if (browser.equals("Chrome")) {
-		   System.setProperty("webdriver.chrome.driver","C:\\drivers\\latest\\chromedriver.exe");
-		   driver = new ChromeDriver();
-
+			String chromeDriverLocation =  System.getProperty("user.dir") +prop.getProperty("chromedriver");
+			System.setProperty("webdriver.chrome.driver",chromeDriverLocation);
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("start-maximized");
+			options.addArguments("disable-infobards");
+		    driver = new ChromeDriver(options);
 		} else if (browser.equals("Mozilla")) {
+			String firefoxDriverLocation =  System.getProperty("user.dir") + prop.getProperty("firefoxdriver");
+	        System.setProperty("webdriver.gecko.driver",firefoxDriverLocation);
 			driver = new FirefoxDriver();
 
 		} else if (browser.equals("Edge")) {
+			String edgeDriverLocation =  System.getProperty("user.dir") + prop.getProperty("edgedriver");
+	        System.setProperty("webdriver.ie.driver", edgeDriverLocation);
 			driver = new EdgeDriver();
 		}
 	}
@@ -163,8 +179,6 @@ public void openBrowser(String browser){
 	  }
 	  
 	  public boolean isElementPresent(String locator){
-		  By by = getLocator(locator);
-			WebElement e = null;
 			try {
 				
 				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -191,18 +205,50 @@ public void openBrowser(String browser){
 	
 	  public void log(String message){
 	    	test.log(Status.INFO,message);
-			System.out.println(message);
+	  }
+	  
+	  public void passTest(String message){
+	    	test.log(Status.PASS,message);
 	  }
 
 	  public void reportFailure(String failureMsg,boolean stopOnFailure) {
-		    System.out.println("Failure ---> "+failureMsg);
-			test.log(Status.FAIL, failureMsg);// failure in extent reports
-		//	takeScreenShot();// put the screenshot in reports
+		   test.log(Status.FAIL, failureMsg);// failure in extent reports
+			takeScreenShot();// put the screenshot in reports
 			softAssert.fail(failureMsg);// failure in TestNG reports
-
-     		if (stopOnFailure) {
+             if (stopOnFailure) {
 				quit();
 			}
+		}
+	  
+		public void takeScreenShot() {
+			// fileName of the screenshot
+
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = new Date();
+			String screenshotFile = dateFormat.format(date).replaceAll(":", "_") + ".png";
+			// take screenshot
+			File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			try {
+				// get the dynamic folder name
+				FileUtils.copyFile(srcFile, new File(ExtentManager.screenshotFolderPath + "//" + screenshotFile));
+				// put screenshot file in reports
+
+				// test.info("Screenshot-> "+
+				// test.addScreenCaptureFromPath(ExtentManager.screenshotFolderPath+"//"+screenshotFile));
+
+				test.fail(
+						"<p><font color=red>" + " Click the below link or check the latest  report folder named "
+								+ ExtentManager.screenshotFolderPath + " and then view the screenshot named "
+								+ screenshotFile + "</font></p>",
+						MediaEntityBuilder
+								.createScreenCaptureFromPath(ExtentManager.screenshotFolderPath + "//" + screenshotFile)
+								.build());
+
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 	  
 	  public int getLeadRowNumberWithCellData(String leadName) {
@@ -215,6 +261,9 @@ public void openBrowser(String browser){
 			
 			return -1;// not found
 		}
+	  
+	  
+	 
 
 		public void selectLeadCheckBox(int rowNum) {
 			driver.findElement(By.cssSelector("lyte-exptable-tr:nth-child("+rowNum+") > lyte-exptable-td:nth-child(2) label")).click();

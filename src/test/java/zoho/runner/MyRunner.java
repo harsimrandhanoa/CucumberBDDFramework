@@ -1,10 +1,12 @@
 package zoho.runner;
 
 
+import org.testng.annotations.Test;
+
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
-@CucumberOptions(
+        @CucumberOptions(
         //features = "@rerun/failed_scenarios.txt",
 		 features = "src/test/resources/zoho",
          glue = {"zoho.teststeps"},
@@ -12,8 +14,7 @@ import io.cucumber.testng.CucumberOptions;
          tags = "@CreateLead or @DeleteLead",
          monochrome = false,
          dryRun = false
-)
+        )
+        
 public class MyRunner extends AbstractTestNGCucumberTests {
-	
-
-}
+	}

@@ -12,7 +12,6 @@ public class Session {
   public LoginPage loginPage;
 	 
   public Session(TestContext testContext){
-	  System.out.println("<------------------ In the sessions constructor ------------------------>");
 	  this.testContext = testContext;
 	  this.homePage = this.testContext.getPageObjectManager().getHomePage();
 	  this.loginPage =  this.testContext.getPageObjectManager().getLoginPage();
@@ -21,7 +20,7 @@ public class Session {
 	
   @Given("I am logged in zoho.com")
 	public void zohoLogin(){
-	  homePage.load("Chrome");
+      homePage.load("Chrome");
 	  homePage.goToLoginPage();
 	  loginPage.doLogin();
     }

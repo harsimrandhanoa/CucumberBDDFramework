@@ -8,7 +8,6 @@ import io.cucumber.java.Before;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import zoho.context.TestContext;
@@ -25,7 +24,6 @@ public class Leads {
 	public LeadDescriptionPage leadDescriptionPage;
 	 
 	public Leads(TestContext testContext){
-		System.out.println("<---------------------- In the leads constructor -------------------->");
 		this.testContext = testContext;
 		this.leadDetailPage= testContext.getPageObjectManager().getleadsDetailPage();
 		this.createLeadPage= testContext.getPageObjectManager().getCreateLeadPage();
@@ -42,8 +40,7 @@ public class Leads {
 	
 	@After
 	public void after(Scenario scenario){
-		testContext.endScenario();
-		testContext.log("Ending of scenario " +scenario.getName());
+		testContext.endScenario(scenario.getName());
 		testContext.getPageObjectManager().getWebDriverManager().quit();
 	}
 	
@@ -55,19 +52,13 @@ public class Leads {
 	 
 	@And("enter and submit lead details")
 	  public void submitDetails(List<LeadData> leadData) {
-			testContext.log("enter and submit lead details "+ leadData.size());
-			testContext.log("enter and submit lead details "+ leadData.get(0).firstName);
-			testContext.log("enter and submit lead details "+ leadData.get(0).lastName);
-			testContext.log("enter and submit lead details "+ leadData.get(0).email);
-			testContext.log("enter and submit lead details "+ leadData.get(0).company);
-            createLeadPage.submitLeadDetails(leadData);
-			
-		}
+         createLeadPage.submitLeadDetails(leadData);
+	 }
 		
 	@DataTableType
 	    public LeadData entry(Map<String, String> entry) {
-			System.out.println(entry.toString());
-	        return new LeadData(entry.get("FirstName"),entry.get("LastName"),entry.get("Email"),entry.get("Company"));
+		//	testContext.log(entry.toString());
+            return new LeadData(entry.get("FirstName"),entry.get("LastName"),entry.get("Email"),entry.get("Company"));
 	    }
 		
 	@Then("Lead Description Page should load")
@@ -86,7 +77,7 @@ public class Leads {
 	   if (condition.equals("be present")) {
            	 leadDetailPage.validateLeadPresent(leadName);
        }else {
-           	 leadDetailPage.validateLeadNotPresent(leadName);
+         leadDetailPage.validateLeadNotPresent(leadName);
        }
 
 	}

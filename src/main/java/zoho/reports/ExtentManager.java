@@ -32,8 +32,8 @@ public class ExtentManager {
 			f.mkdirs();// create dynamic report folder name + screenshots
 
 			ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportFolderPath);
-			sparkReporter.config().setReportName("Data driven Framework");
-			sparkReporter.config().setDocumentTitle("Data driven Framework Reditt Reports");
+			sparkReporter.config().setReportName("Cucumber BDD Framework");
+			sparkReporter.config().setDocumentTitle("Cucumber BDD Zoho Framework Reports");
 			/*
 			 * sparkReporter.config().setTheme(Theme.STANDARD);
 			 * sparkReporter.config().setEncoding("utf-8");
