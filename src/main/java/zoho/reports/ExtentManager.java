@@ -16,9 +16,9 @@ public class ExtentManager {
 	public static String screenshotFolderPath;
 
 	public static ExtentReports getReports() {
-		if (reports == null) {// first test
-
-			reports = new ExtentReports();
+     	if (reports == null) {// first test
+	
+     		reports = new ExtentReports();
 			// init the report folder
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = new Date();
