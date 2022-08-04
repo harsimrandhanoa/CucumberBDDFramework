@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="1" ignored="0" total="2" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Test runner" duration-ms="136789" started-at="2022-08-04T13:50:22 EDT" finished-at="2022-08-04T13:52:39 EDT">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper, io.cucumber.testng.FeatureWrapper)[pri:0, instance:zoho.runner.MyRunner@33f88ab]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test name="Cucumber Runner" duration-ms="136789" started-at="2022-08-04T13:50:22 EDT" finished-at="2022-08-04T13:52:39 EDT">
+      <class name="zoho.runner.MyRunner">
+        <test-method status="PASS" signature="setUpClass()[pri:0, instance:zoho.runner.MyRunner@33f88ab]" name="setUpClass" is-config="true" duration-ms="853" started-at="2022-08-04T13:50:22 EDT" finished-at="2022-08-04T13:50:23 EDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method status="PASS" signature="runScenario(io.cucumber.testng.PickleWrapper, io.cucumber.testng.FeatureWrapper)[pri:0, instance:zoho.runner.MyRunner@33f88ab]" name="runScenario" duration-ms="78978" started-at="2022-08-04T13:50:23 EDT" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-08-04T13:51:42 EDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Creation of a lead"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Managing leads]"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method status="FAIL" signature="runScenario(io.cucumber.testng.PickleWrapper, io.cucumber.testng.FeatureWrapper)[pri:0, instance:zoho.runner.MyRunner@33f88ab]" name="runScenario" duration-ms="56411" started-at="2022-08-04T13:51:42 EDT" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2022-08-04T13:52:38 EDT">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Deletion of the lead"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[Managing leads]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[The following asserts failed:
+Object not found delete_id]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: The following asserts failed:
+Object not found delete_id
+at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:47)
+at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:31)
+at zoho.managers.WebDriverManager.quit(WebDriverManager.java:287)
+at zoho.managers.WebDriverManager.reportFailure(WebDriverManager.java:219)
+at zoho.managers.WebDriverManager.findElement(WebDriverManager.java:148)
+at zoho.managers.WebDriverManager.click(WebDriverManager.java:124)
+at zoho.pages.LeadsDetailPage.deleteLead(LeadsDetailPage.java:38)
+at zoho.teststeps.Leads.deleteLead(Leads.java:93)
+at ✽.I click the delete button(file:///C:/workspace/ZohoCucumberNew/src/test/resources/zoho/leads.feature:46)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method status="PASS" signature="tearDownClass()[pri:0, instance:zoho.runner.MyRunner@33f88ab]" name="tearDownClass" is-config="true" duration-ms="346" started-at="2022-08-04T13:52:39 EDT" finished-at="2022-08-04T13:52:39 EDT">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- zoho.runner.MyRunner -->
+    </test> <!-- Cucumber Runner -->
+  </suite> <!-- Test runner -->
+</testng-results>
